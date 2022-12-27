@@ -1,22 +1,13 @@
 <template>
 
+  <div class="my-12 mx-auto max-w-3xl text-center">
+    <h1 class="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl">Livros</h1>
+  </div>
+
   <div class="flex justify-center my-8">
-    <div v-if="teste" class="bg-white rounded-lg border border-gray-200 w-96 text-gray-900">
-      
-      <!-- <button aria-current="true" type="button" class=" text-left px-6 py-2 border-b border-gray-200 w-full rounded-t-lg bg-blue-600 text-white cursor-pointer">
-        The current link item
-      </button> -->
+    <div class="bg-white rounded-lg border border-gray-200 text-gray-900">
 
-      <template v-if="books">
-
-
-      <button v-for="item in books" class="text-left px-6 py-2 border-b border-gray-200 w-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-0 focus:bg-gray-200 focus:text-gray-600 transition duration-500 cursor-pointer">{{ item }}</button>
-
-      </template>
-
-      {{ teste  }}
-
-      <!-- <button type="button" class="text-left px-6 py-2 border-gray-200 w-full rounded-b-lg focus:outline-none focus:ring-0 text-gray-400 cursor-default">A disabled link item</button> -->
+      <button :key="key" v-for="(item, key) in books" class="text-left px-6 py-2 border-b border-gray-200 w-full hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-0 focus:bg-gray-200 focus:text-gray-600 transition duration-500">{{ item }}</button>
 
     </div>
   </div>
@@ -25,23 +16,18 @@
 
 <script>
 
-import axios from '../api/axios'
+export default {
 
-export default{
+  data: () => ({
+    books: []
+  }),
 
-  data() {
-    return { books: '' }
-  },
-
-  created() {
-
-    axios.get('http://localhost:3000/api').then(function (resposta) {
-      console.log(resposta.data)
-    })
-
+  async created() {
+    const response = await fetch("http://localhost:8000/api/");
+    const data = await response.json();
+    this.books = data;
   }
 
 }
 
 </script>
-

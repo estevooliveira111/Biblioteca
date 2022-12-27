@@ -6,6 +6,8 @@
   
   <!-- <Navbar /> -->
 
-  <RouterView />
+  <main class="container mx-auto px-4">
+    <RouterView />
+  </main>
 
 </template>

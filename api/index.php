@@ -9,10 +9,11 @@ while($arquivo = $diretorio -> read()){
     $files[] = $arquivo;
 }
 
-$diretorio -> close();
+$diretorio->close();
 
-unset($files[0]);
-unset($files[1]);
-sort($files);
+foreach ($files as $key => $value) {
+    if ($value == ".." or $value == ".")
+        unset($files[$key]);
+}
 
 print(json_encode($files));
